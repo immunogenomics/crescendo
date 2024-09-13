@@ -1,0 +1,75 @@
+---
+title: "Getting started with Crescendo"
+author: Nghia Millard
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with Crescendo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Installation
+
+You can install Crescendo from github with devtools
+```{r eval = FALSE}
+devtools::install_github(repo = "immunogenomics/crescendo")
+```
+
+```{r setup}
+library(crescendo)
+library(parallel)
+```
+
+# Load dataset with metadata, raw gene counts, and Harmony clusters (result from running the Harmony algorithm)
+```{r}
+obj <- readRDS(system.file("extdata", "pbmc_4gene_obj.rds", package = "crescendo"))
+
+obj %>% str(1)
+obj$exprs_raw %>% dim
+```
+
+
+```{r}
+# Set which genes to correct and parameters for coorrection (parameters explained in GettingStarted vignette)
+batch_var <- 'batch'
+genes_use <- c('TRAC', 'MS4A1')
+prop <- 0.05
+min_cells <- 50
+
+mc.cores <- NULL
+lambda <- NULL
+alpha <- 0
+```
+
+```{r}
+# Run Crescendo
+corr_counts <- crescendo(
+    Ycounts = obj$exprs_raw,
+    meta_data = obj$meta_data,
+    R = obj$R,
+    batch_var = 'batch',
+    genes_use = genes_use,
+    prop = prop,
+    min_cells = min_cells,
+    lambda = lambda,
+    alpha = alpha,
+    mc.cores = mc.cores,
+    return_obj = FALSE,
+    verbose = FALSE
+    # verbose = TRUE
+)
+
+corr_counts %>% dim
+```
+
+# Session information
+```{r}
+sessionInfo()
+```

@@ -1,0 +1,45 @@
+Package: crescendo
+Type: Package
+Title: Implements the Crescendo algorithm for integrating count data across datasets
+Version: 1.0
+Date: 2024-03-12
+Authors@R: c(
+    person("Nghia", "Millard", email = "nghiamillard10@gmail.com",
+           role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0518-7674")),
+    person("Soumya", "Raychaudhuri", 
+           role = c("aut"), comment = c(ORCID = "0000-0002-1901-8265")),
+    person("Ilya", "Korsunsky", email = "ilya.korsunsky@gmail.com",
+        role = c("aut"), comment = c(ORCID = "0000-0003-4848-3948"))
+    )
+Description: Investigators often encounter confounding factors in the gene expression of their single-cell data that include 
+    artificial differences exhibited across batches, samples, technologies, datasets, and modalities. In order to integrate 
+    their data across these confounding factors, computational analysts typically use integration algorithms that operate in a 
+    lower-dimensional space, but don't directly correct gene expression. Cresecendo allows users to integrate their data by 
+    directly correcting gene expression; this may benefit investigators that want to visualize gene expression in their data,
+    with a particular benefit in spatial transcriptomics contexts.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports: 
+    Rcpp (>= 1.0.11),
+    RcppParallel (>= 5.1.5),
+    BH,
+    tidyverse,
+    magrittr,
+    parallel,
+    glmnet,
+    data.table,
+    Matrix,
+    methods,
+    stats,
+    purrr,
+    stringr,
+    tidyselect,
+    dplyr
+Depends: 
+    R (>= 3.5.0)
+Suggests: 
+    knitr,
+    rmarkdown,
+VignetteBuilder: knitr
+LinkingTo: Rcpp, RcppArmadillo, RcppParallel, BH
+RoxygenNote: 7.2.3
