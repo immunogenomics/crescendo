@@ -1,6 +1,8 @@
 # Crescendo
 Crescendo for single-gene correction in single-cell RNA-sequencing data
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14366602.svg)](https://doi.org/10.5281/zenodo.14366602)
+
 Implementation of the Crescendo algorithm, which allows investigators to remove the effects of confounding factors by directly correcting gene expression count data.
 
 ## Installation
